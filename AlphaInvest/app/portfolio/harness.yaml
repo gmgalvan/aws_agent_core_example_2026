@@ -32,7 +32,6 @@ tools: []
 # "*" permits all available tools, including built-in tools.
 # https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness-tools.html
 allowedTools:
-  - "@browser"
   - "@finance"
 
 # Load skills from S3, Git, container files, or bundled AWS skills.
@@ -47,8 +46,7 @@ skills: []
 # a project memory name. Use memory: { disabled: {} } to turn memory off.
 # https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_HarnessMemoryConfiguration.html
 memory:
-  agentCoreMemoryConfiguration:
-    name: investor_memory
+  disabled: {}
 
 # Context policy and limits for one invocation.
 truncation:
