@@ -1,0 +1,21 @@
+[build-system]
+requires = ["hatchling ~= 1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "alphainvest-trading-agent"
+version = "0.1.0"
+description = "Trading Agent autónomo con Claude Agent SDK en AgentCore Runtime"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "aws-opentelemetry-distro ~= 0.21.0",
+    "bedrock-agentcore >= 1.18.1, < 2.0.0",
+    "claude-agent-sdk >= 0.2.178, < 0.3.0",
+    "openinference-instrumentation-claude-agent-sdk ~= 0.1.13",
+]
+
+[tool.agentcore]
+entrypoint = "main.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]

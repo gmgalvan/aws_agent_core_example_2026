@@ -1,0 +1,107 @@
+# Harness configuration: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness.html
+
+name: portfolio
+
+# Choose one model configuration.
+# https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_HarnessModelConfiguration.html
+model:
+  bedrockModelConfig:
+    modelId: us.anthropic.claude-sonnet-4-5-20250929-v1:0
+# Optional tuning fields depend on the selected model; omit unsupported parameters.
+    # temperature: 0.2
+    # topP: 0.9
+    # maxTokens: 4096
+    # apiFormat: converse_stream
+
+# Edit system-prompt.md next to this file, or set an inline content block:
+# systemPrompt:
+#   - text: |
+#       You are a helpful assistant.
+
+# Add tools alongside the harness's built-in shell and file operations.
+# https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_HarnessTool.html
+tools: []
+# To add a remote MCP tool, replace [] with:
+# tools:
+#   - name: research
+#     type: remote_mcp
+#     config:
+#       remoteMcp:
+#         url: https://mcp.example.com/mcp
+
+# "*" permits all available tools, including built-in tools.
+# https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness-tools.html
+allowedTools:
+  - "@browser"
+  - "@finance"
+
+# Load skills from S3, Git, container files, or bundled AWS skills.
+# https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness-skills.html
+skills: []
+# To add an AWS skill, replace [] with:
+# skills:
+#   - awsSkills:
+#       paths: [core-skills/aws-serverless]
+
+# For existing memory, use agentCoreMemoryConfiguration with an arn or
+# a project memory name. Use memory: { disabled: {} } to turn memory off.
+# https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_HarnessMemoryConfiguration.html
+memory:
+  agentCoreMemoryConfiguration:
+    name: investor_memory
+
+# Context policy and limits for one invocation.
+truncation:
+  strategy: sliding_window
+  # config:
+  #   slidingWindow:
+  #     messagesCount: 40
+maxIterations: 12
+maxTokens: 20000
+timeoutSeconds: 180
+
+# Values must be strings. Environment values are stored in plaintext.
+environmentVariables: {}
+
+# Omit both to use the service-provided environment.
+# environmentArtifact:
+#   containerConfiguration:
+#     containerUri: 123456789012.dkr.ecr.us-west-2.amazonaws.com/my-harness:latest
+
+# Service runtime settings. For VPC mode, replace the resource IDs.
+# EFS and S3 Files mounts require VPC mode; mount paths must be unique.
+# https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness-environment.html
+# environment:
+#   agentCoreRuntimeEnvironment:
+#     networkConfiguration:
+#       networkMode: VPC
+#       networkModeConfig:
+#         subnets: [subnet-0123456789abcdef0]
+#         securityGroups: [sg-0123456789abcdef0]
+#     lifecycleConfiguration:
+#       idleRuntimeSessionTimeout: 900
+#       maxLifetime: 28800
+#     filesystemConfigurations:
+#       - sessionStorage:
+#           mountPath: /mnt/session
+#       - efsAccessPoint:
+#           accessPointArn: arn:aws:elasticfilesystem:us-west-2:123456789012:access-point/fsap-0123456789abcdef0
+#           mountPath: /mnt/data
+#       - s3FilesAccessPoint:
+#           accessPointArn: arn:aws:s3files:us-west-2:123456789012:file-system/fs-0123456789abcdef0/access-point/fsap-0123456789abcdef0
+#           mountPath: /mnt/files
+
+# Omit authorizerConfiguration to use AWS IAM caller authorization.
+# https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/harness-security.html
+# authorizerConfiguration:
+#   customJWTAuthorizer:
+#     discoveryUrl: https://id.example.com/.well-known/openid-configuration
+#     allowedAudience: [my-harness-app]
+
+# The project creates an execution role when this field is absent.
+# executionRoleArn: arn:aws:iam::123456789012:role/MyHarnessRole
+tags: {}
+
+# CLI project build settings are not CreateHarness properties.
+# dockerfile: Dockerfile
+# For VPC Dockerfile builds, also supply networkConfig.vpcId.

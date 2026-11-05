@@ -1,0 +1,7 @@
+[project]
+name = "alphainvest-finance-tools"
+version = "0.1.0"
+description = "Herramientas financieras simuladas expuestas por AgentCore Gateway"
+requires-python = ">=3.12,<3.13"
+# boto3 viene incluido en el runtime de AWS Lambda.
+dependencies = []

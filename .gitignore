@@ -1,0 +1,42 @@
+# --- Secretos y estado local -------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Contraseñas de usuarios de prueba de Cognito y grabaciones de Browser.
+.local/
+
+# --- Identificadores de cuenta de AWS ----------------------------------------
+# Contienen IDs de cuenta y ARNs; scripts/targets.sh los regenera.
+**/agentcore/aws-targets.json
+**/agentcore/.cli/
+**/agentcore/.cache/
+
+# --- Python ------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# --- Node / AWS CDK ----------------------------------------------------------
+node_modules/
+cdk.out/
+.cdk.staging/
+dist/
+
+# --- Sistema operativo y editores --------------------------------------------
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+*.swp
+.idea/
+
+# --- Material ajeno a la demo (laboratorio de otro curso) ---------------------
+1-1-agentic-loops/
+launch.json
+.vscode/

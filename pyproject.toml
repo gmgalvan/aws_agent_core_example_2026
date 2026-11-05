@@ -1,0 +1,18 @@
+[project]
+name = "alphainvest-dev"
+version = "0.1.0"
+description = "Herramientas de desarrollo y pruebas de AlphaInvest AI"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "boto3>=1.40",
+    "mcp>=2.3,<3",
+    "moto[dynamodb]>=5.1",
+    "pytest>=8.4",
+    "pyyaml>=6.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["AlphaInvest/app/finance_tools"]
+markers = ["aws: requiere credenciales y recursos desplegados en AWS"]
+addopts = "-m 'not aws'"

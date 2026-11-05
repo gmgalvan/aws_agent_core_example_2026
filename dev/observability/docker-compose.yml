@@ -1,0 +1,8 @@
+# Jaeger v2 local: UI en http://localhost:16686, OTLP en 4317 (gRPC) y 4318 (HTTP).
+services:
+  jaeger:
+    image: jaegertracing/jaeger:2.22.0
+    ports:
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"

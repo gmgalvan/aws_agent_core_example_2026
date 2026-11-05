@@ -1,0 +1,41 @@
+[
+  {
+    "name": "get_stock_price",
+    "description": "Consulta el precio simulado y el cambio porcentual diario de una acción. Símbolos disponibles: AAPL, MSFT, NVDA. Datos ficticios para fines educativos.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "symbol": {"type": "string", "description": "Símbolo bursátil, por ejemplo AAPL."}
+      },
+      "required": ["symbol"]
+    }
+  },
+  {
+    "name": "get_portfolio",
+    "description": "Devuelve el portafolio simulado compartido: posiciones, cantidades, valor de mercado, peso porcentual de cada posición, efectivo y valor total en USD.",
+    "inputSchema": {"type": "object", "properties": {}}
+  },
+  {
+    "name": "simulate_trade",
+    "description": "Ejecuta una operación de paper trading (nunca una operación real). Valida efectivo disponible, posiciones existentes, símbolos conocidos y un máximo de 1000 acciones por orden. Devuelve status FILLED o REJECTED con el motivo.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "symbol": {"type": "string", "description": "Símbolo bursátil: AAPL, MSFT o NVDA."},
+        "side": {"type": "string", "description": "BUY para comprar o SELL para vender, en mayúsculas."},
+        "quantity": {"type": "integer", "description": "Número entero positivo de acciones."}
+      },
+      "required": ["symbol", "side", "quantity"]
+    }
+  },
+  {
+    "name": "get_trade_history",
+    "description": "Lista las operaciones simuladas más recientes, incluidas las rechazadas, con identificador, fecha, activo, cantidad y resultado.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "limit": {"type": "integer", "description": "Número de operaciones a devolver, entre 1 y 50. Por defecto 10."}
+      }
+    }
+  }
+]
